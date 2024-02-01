@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { signIn } from 'next-auth/react';
 import { useRouter } from "next/navigation";
 import { SafeUser } from "@/types";
+import { ThreeDots } from "react-loader-spinner";
 
 interface RegisterFormProps {
     currentUser: SafeUser | null
@@ -104,7 +105,11 @@ const RegisterForm = ({ currentUser }: RegisterFormProps) => {
                 required
                 type="password"
             />
-            <Button label={isLoading ? "Loading" : "Cadastrar"} onClick={handleSubmit(onSubmit)} />
+            {isLoading ? (
+                <ThreeDots visible={true} height="60" width="60" color="#111111" radius="9" ariaLabel="three-dots-loading" />
+            ) : (
+                <Button label="Cadastrar" onClick={handleSubmit(onSubmit)} />
+            )}
             <p className="text-sm">Já tem uma conta? 
                 <Link href={"/login"} className="underline ml-2">Entrar</Link>
             </p>

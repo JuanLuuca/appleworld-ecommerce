@@ -11,6 +11,8 @@ type CartContextType = {
     handleCartQtyIncrease: (product: CartProductType) => void;
     handleCartQtyDecrease: (product: CartProductType) => void;
     handleClearCart: () => void;
+    paymentIntent: string | null;
+    handleSetPaymentIntent: (val: string | null) => void;
 }
 
 export const CartContext = createContext<CartContextType | null>(null);
@@ -24,14 +26,16 @@ export const CartContextProvider = (props: Props) => {
     const [cartTotalAmount, setCartTotalAmount] = useState(0);
     const [cartProducts, setCartProducts] = useState<CartProductType[] | null>(null);
 
-    // console.log("qty", cartTotalQty);
-    // console.log("mount", cartTotalAmount);
+    const [paymentIntent, setPaymentIntent] = useState<string | null>(null);
 
     useEffect(() => {
         const cItems: any = localStorage.getItem("CartItems");
         const cProducts: CartProductType[] | null = JSON.parse(cItems);
+        const ShopPaymentIntent: any = localStorage.getItem("CartItems");
+        const paymentIntent: string | null = JSON.parse(ShopPaymentIntent);
 
         setCartProducts(cProducts);
+        setPaymentIntent(paymentIntent);
     }, []);
 
     useEffect(() => {
@@ -134,7 +138,12 @@ export const CartContextProvider = (props: Props) => {
         setCartProducts(null);
         setCartTotalQty(0);
         localStorage.setItem("CartItems", JSON.stringify(null));
-    }, [cartProducts])
+    }, [cartProducts]);
+
+    const handleSetPaymentIntent = useCallback((val: string | null) => {
+        setPaymentIntent(val);
+        localStorage.setItem("CartItems", JSON.stringify(val));
+    }, [paymentIntent]);
 
     const value ={
         cartTotalQty,
@@ -144,7 +153,9 @@ export const CartContextProvider = (props: Props) => {
         handleRemoveProductFromCart,
         handleCartQtyIncrease,
         handleCartQtyDecrease,
-        handleClearCart
+        handleClearCart,
+        handleSetPaymentIntent,
+        paymentIntent
     };
 
     return <CartContext.Provider value={value} {...props} />
