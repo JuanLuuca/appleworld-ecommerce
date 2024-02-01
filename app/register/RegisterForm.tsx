@@ -30,7 +30,7 @@ const RegisterForm = ({ currentUser }: RegisterFormProps) => {
     const router = useRouter();
 
     useEffect(() => {
-        if(!currentUser) {
+        if(currentUser) {
             router.push("/cart");
             router.refresh();
         }
@@ -62,7 +62,7 @@ const RegisterForm = ({ currentUser }: RegisterFormProps) => {
         );
     };
 
-    if(!currentUser) {
+    if(currentUser) {
         return <p className="text-center">Logado. Redirecionando...</p>
     };
 
@@ -106,7 +106,7 @@ const RegisterForm = ({ currentUser }: RegisterFormProps) => {
             />
             <Button label={isLoading ? "Loading" : "Cadastrar"} onClick={handleSubmit(onSubmit)} />
             <p className="text-sm">Já tem uma conta? 
-                <a href={"/login"} className="underline ml-2">Entrar</a>
+                <Link href={"/login"} className="underline ml-2">Entrar</Link>
             </p>
         </>
     );

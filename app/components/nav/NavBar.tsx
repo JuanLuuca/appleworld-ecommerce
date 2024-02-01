@@ -15,7 +15,7 @@ const NavBar = async () => {
             <div className="py-4 border-b-[1px]">
                 <Container>
                     <div className="flex items-center justify-between gap-3 md:gap-0">
-                        <a  href="/" className={`${redressed.className} font-bold text-2x1`}>Apple World ICON</a>
+                        <Link  href="/" className={`${redressed.className} font-bold text-2x1`}>Apple World ICON</Link>
                         <div className="hidden md:block">Pesquisar</div>
                         <div className="flex items-center gap-8 md:gap-12">
                             <CartCount />

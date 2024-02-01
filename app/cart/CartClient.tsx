@@ -16,10 +16,10 @@ const CartClient = () => {
             <div className="flex flex-col items-center">
                 <div className="text-2xl">Seu carrinho está vazio</div>
                 <div>
-                    <a href={"/"} className="text-slate-500 flex items-center gap-1 mt-2">
+                    <Link href={"/"} className="text-slate-500 flex items-center gap-1 mt-2">
                         <MdArrowBack />
                         <span>Ir para o Menu</span>
-                    </a>
+                    </Link>
                 </div>
             </div>
         )
@@ -52,10 +52,10 @@ const CartClient = () => {
                     </div>
                     <p className="text-slate-500">Calculados na finalização da compra</p>
                     <Button label="Entrar em contato" onClick={() => {}} />
-                    <a href={"/"} className="text-slate-500 flex items-center gap-1 mt-2">
+                    <Link href={"/"} className="text-slate-500 flex items-center gap-1 mt-2">
                         <MdArrowBack />
                         <span>Continue comprando</span>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

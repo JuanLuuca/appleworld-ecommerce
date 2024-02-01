@@ -28,7 +28,7 @@ const LoginForm = ({ currentUser }: LoginFormProps) => {
     const router = useRouter();
 
     useEffect(() => {
-        if(!currentUser) {
+        if(currentUser) {
             router.push("/cart");
             router.refresh();
         }
@@ -53,7 +53,7 @@ const LoginForm = ({ currentUser }: LoginFormProps) => {
         })
     }
 
-    if(!currentUser) {
+    if(currentUser) {
         return <p className="text-center">Logado. Redirecionando...</p>
     }
 
@@ -89,7 +89,7 @@ const LoginForm = ({ currentUser }: LoginFormProps) => {
             />
             <Button label={isLoading ? "Loading" : "Entrar"} onClick={handleSubmit(onSubmit)} />
             <p className="text-sm">Não tem conta ainda?  
-                <a href={"/register"} className="underline ml-2">Criar conta</a>
+                <Link href={"/register"} className="underline ml-2">Criar conta</Link>
             </p>
         </>
     );

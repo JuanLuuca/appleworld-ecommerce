@@ -46,12 +46,12 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                     >
                         {currentUser ? 
                             <div>
-                                <a  href="/orders">
+                                <Link  href="/orders">
                                     <MenuItem onClick={toogleOpen}>Seus Pedidos</MenuItem>
-                                </a>
-                                <a  href="/admin">
+                                </Link>
+                                <Link  href="/admin">
                                     <MenuItem onClick={toogleOpen}>Admin Dashboard</MenuItem>
-                                </a>
+                                </Link>
                                 <hr />
                                 <MenuItem onClick={() => { 
                                     toogleOpen(); 
@@ -60,12 +60,12 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                             </div>
                         : 
                             <div>
-                                <a  href="/login">
+                                <Link  href="/login">
                                     <MenuItem onClick={toogleOpen}>Entrar</MenuItem>
-                                </a>
-                                <a  href="/register">
+                                </Link>
+                                <Link  href="/register">
                                     <MenuItem onClick={toogleOpen}>Criar conta</MenuItem>
-                                </a>
+                                </Link>
                             </div>
                         }
                     </div>
