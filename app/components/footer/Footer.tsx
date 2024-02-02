@@ -7,7 +7,7 @@ import { RiWhatsappFill } from "react-icons/ri";
 
 const Footer = () => {
     return (
-        <footer className="bg-slate-700 text-slate-200 text-xs mt-16">
+        <footer className="text-slate-200 bg-gradient-to-r from-slate-600 to-slate-700 z-30 text-xs mt-16">
             <Container>
                 <div className="flex flex-col md:flex-row justify-between pt-16 pb-8">
                     <FooterList>

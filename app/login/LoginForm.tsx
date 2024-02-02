@@ -51,12 +51,12 @@ const LoginForm = ({ currentUser }: LoginFormProps) => {
             if(callback?.error) {
                 toast.error(callback.error);
             }
-        })
-    }
+        });
+    };
 
     if(currentUser) {
         return <p className="text-center">Logado. Redirecionando...</p>
-    }
+    };
 
     return (
         <>

@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import Container from "../components/Container";
 import FormWrap from "../components/FormWrap";
 import LoginForm from "./LoginForm";
 import { getCurrentUser } from "@/actions/getCurrentUser";
