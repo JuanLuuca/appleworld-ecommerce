@@ -2,7 +2,6 @@
 
 import { useCart } from "@/hooks/useCart";
 import { useEffect, useState } from "react";
-import Checkout from "./page";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
@@ -10,7 +9,6 @@ const CheckoutClient = () => {
     const { cartProducts, paymentIntent, handleSetPaymentIntent } = useCart();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const [clientSecret, setClientSecret] = useState('');
 
     const router = useRouter();
 
@@ -34,7 +32,6 @@ const CheckoutClient = () => {
 
                 return res.json();
             }).then((data) => {
-                setClientSecret(data.paymentIntent.client_secret);  
                 handleSetPaymentIntent(data.paymentIntent.id); 
             }).catch((error) => {
                 setError(true);
@@ -44,9 +41,19 @@ const CheckoutClient = () => {
     }, [cartProducts, paymentIntent]);
 
     return (
-        <>
-            <Checkout />
-        </>
+        <div className="w-full">
+            {loading && <div className="text-center">Carregando...</div>}
+            {/* {error && <div className="text-center text-rose-500">Algo deu errado...</div>}
+            {paymentSuccess && (
+                <div className="flex items-center flex-col gap-4">
+                    <div className="text-teal-500 text-center">Pagamento com sucesso</div>
+                    <div className="max-w-[220px] w-full">
+                        <Button label="Visualizar seus pedidos" onClick={() => router.push('/order')} />
+                    </div>
+                </div>
+            )} */}
+            {/* <Checkout /> */}
+        </div>
     );
 };
 
