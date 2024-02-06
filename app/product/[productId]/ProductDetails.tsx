@@ -109,7 +109,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
                     <span className="font-semibold">Categoria:</span> {product.category}
                 </div>
                 <div>
-                    <span className="font-semibold">brand:</span> {product.brand}
+                    <span className="font-semibold">Porcentagem Bateria:</span> {product.brand}
                 </div>
                 <div className={product.inStock ? "text-teal-400" : "text-rose-400"}>{product.inStock ? 'Em estoque' : 'Fora de estoque'}</div>
                 <Horizontal />
