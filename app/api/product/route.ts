@@ -5,7 +5,9 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
     const currentUser = await getCurrentUser();
 
-    if(!currentUser || currentUser.role !== "ADMIN") {
+    if(!currentUser) return NextResponse.error();
+
+    if(currentUser.role !== "ADMIN") {
         return NextResponse.error();
     }
 
@@ -25,4 +27,22 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json(product);
+}
+
+export async function PUT(request: Request) {
+    const currentUser = await getCurrentUser();
+
+    if(!currentUser || currentUser.role !== "ADMIN") {
+        return NextResponse.error();
+    }
+
+    const body = await request.json();
+    const { id, inStock } = body;
+
+    const product = await prisma.product.update({
+        where: { id: id },
+        data: { inStock }
+    });
+
+    return NextResponse.json(product)
 }

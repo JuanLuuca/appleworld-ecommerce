@@ -13,7 +13,9 @@ import { colors } from "@/utils/Colors";
 import { useCallback, useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export type ImageType = {
     color: string;
@@ -31,6 +33,8 @@ const AddProductForm = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [images, setImages] = useState<ImageType[] | null>();
     const [isProductCreated, setIsProductCreated] = useState(false); 
+    const router = useRouter();
+
     const {register, handleSubmit, setValue, watch, reset, formState: { errors }} = useForm<FieldValues>({
         defaultValues: {
             name: '',
@@ -84,17 +88,58 @@ const AddProductForm = () => {
                             uploadTask.on(
                                 'state_changed',
                                 (snapshot) => {
-                                    
+                                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                    console.log('Upload is ' + progress + '% done');
+                                    switch (snapshot.state) {
+                                    case 'paused':
+                                        console.log('Upload is paused');
+                                        break;
+                                    case 'running':
+                                        console.log('Upload is running');
+                                        break;
+                                    }
+                                },
+                                (error) => {
+                                    console.log("error upload a imagem", error)
+                                    reject(error)
+                                },
+                                () => {
+                                    getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
+                                        uploadedImages.push({
+                                            ...item,
+                                            image: downloadUrl
+                                        });
+                                        console.log("imagem de arquivo", downloadUrl);
+                                        resolve()
+                                    })
+                                    .catch((error) => {
+                                        reject(error);
+                                    }) 
                                 }
                             )
                         })
                     }
                 }
             } catch(error) {
-
+                setIsLoading(false);
+                console.log("erro ao fazer o upload da imagem");
+                return toast.error("Erro ao fazer o upload da imagem");
             }
-        }
-    }
+        };
+
+        await handleImageUploads();
+        const productData = { ...data, images: uploadedImages };
+        
+        axios.post('/api/product', productData).then(() => {
+            toast.success("Produto criado.");
+            setIsProductCreated(true);
+            router.refresh();
+        }).catch((error) => {
+            toast.error("Algo deu errado ao salvar imagem selecionada");
+        }).finally(() => {
+            setIsLoading(false);
+        });
+    };
 
     const category = watch('category');
 

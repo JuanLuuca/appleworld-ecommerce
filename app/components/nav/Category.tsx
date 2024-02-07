@@ -1,6 +1,5 @@
 "use client"
 
-import { Icon } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
 import { useCallback } from "react";

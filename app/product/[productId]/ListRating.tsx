@@ -10,6 +10,8 @@ interface ListRatingProps {
 }
 
 const ListRating = ({ product }: ListRatingProps) => {
+    if(product.reviews.length === 0) return null;
+    
     return (
         <div>
             <Heading title="Review do Produto" />
