@@ -52,7 +52,7 @@ const Summary = ({ products, orders, users }: SummaryProps) => {
             let tempData = {...prev}
 
             const totalSale = orders.reduce((acc, item) => {
-                if(item.status === "completo") {
+                if(item.paymentStatus === "completo") {
                     return acc + item.amount
                 } 
                 else {
@@ -61,12 +61,14 @@ const Summary = ({ products, orders, users }: SummaryProps) => {
             }, 0)
 
             const paidOrders = orders.filter((order => {
-                return order.status === "complete"
+                return order.paymentStatus === "completo"
             }));
 
             const unpaidOrders = orders.filter((order => {
-                return order.status === "pendente" 
+                return order.paymentStatus === "pendente" 
             }));
+
+            console.log(totalSale)
 
             tempData.sale.digit = totalSale;
             tempData.orders.digit = orders.length;
@@ -93,7 +95,7 @@ const Summary = ({ products, orders, users }: SummaryProps) => {
                             <div key={key} className="rounded-xl border-2 p-4 flex flex-col items-center gap-2 transition">
                                 <div className="text-xl md:text-4xl font-bold">
                                     {
-                                        summaryData[key].label === "Total Vendido" ? <>{formatPrice(summaryData[key].digit)}</> : <>{formatNumber(summaryData[key].digit)}</>
+                                        summaryData[key].label === "Total Vendido" ? <>{formatPrice(summaryData[key].digit / 100    )}</> : <>{formatNumber(summaryData[key].digit)}</>
                                     }    
                                 </div> 
                                 <div>{summaryData[key].label}</div>

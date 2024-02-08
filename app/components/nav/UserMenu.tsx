@@ -44,7 +44,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                             cursor-pointer
                         "
                     >
-                        {currentUser ? 
+                        {currentUser?.role === "ADMIN" ? (
                             <div>
                                 <Link  href="/orders">
                                     <MenuItem onClick={toogleOpen}>Seus Pedidos</MenuItem>
@@ -58,7 +58,18 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                                     signOut();
                                 }}>Sair</MenuItem>
                             </div>
-                        : 
+                        ) : currentUser?.role === "USER" ? ( 
+                            <div>
+                                <Link  href="/orders">
+                                    <MenuItem onClick={toogleOpen}>Seus Pedidos</MenuItem>
+                                </Link>
+                                <hr />
+                                <MenuItem onClick={() => { 
+                                    toogleOpen(); 
+                                    signOut();
+                                }}>Sair</MenuItem>
+                            </div>
+                        ) : (
                             <div>
                                 <Link  href="/login">
                                     <MenuItem onClick={toogleOpen}>Entrar</MenuItem>
@@ -67,7 +78,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                                     <MenuItem onClick={toogleOpen}>Criar conta</MenuItem>
                                 </Link>
                             </div>
-                        }
+                        )}
                     </div>
                 )}
             </div>

@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import toast from "react-hot-toast";
 import { MdAccessTimeFilled, MdDeliveryDining, MdDone, MdRemoveRedEye } from "react-icons/md";
+import { LiaMoneyCheckAltSolid } from "react-icons/lia";
 
 interface ManageOrdersClientProps {
     orders: ExtendedOrder[]
@@ -30,8 +31,8 @@ const ManageOrdersClient = ({ orders }: ManageOrdersClientProps) => {
             return {
                 id: order.id,
                 customer: order.user.name,
-                price: formatPrice(order.amount / 100),
-                paymentStatus: order.status,
+                amount: formatPrice(order.amount / 100),
+                paymentStatus: order.paymentStatus,
                 date: moment(order.createDate).fromNow(),
                 deliveryStatus: order.deliveryStatus,
             }
@@ -43,7 +44,7 @@ const ManageOrdersClient = ({ orders }: ManageOrdersClientProps) => {
         { field: 'customer', headerName: 'Nome do Cliente', width: 130 },
         {
             field: "amount",
-            headerName: "Quantidade",
+            headerName: "Preço",
             width: 130,
             renderCell: (params) => {
                 return (
@@ -118,7 +119,7 @@ const ManageOrdersClient = ({ orders }: ManageOrdersClientProps) => {
         },
         {
             field: "date",
-            headerName: "Date",
+            headerName: "Data",
             width: 130
         },
         {
@@ -129,6 +130,9 @@ const ManageOrdersClient = ({ orders }: ManageOrdersClientProps) => {
             renderCell: (params) => {
                 return (
                     <div className="flex justify-evenly gap-4 w-full">
+                        <ActionBtn icon={LiaMoneyCheckAltSolid} onClick={() => {
+                            handlePayment(params.row.id);
+                        }} />
                         <ActionBtn icon={MdDeliveryDining} onClick={() => {
                             handleDispatch(params.row.id);
                         }} />
@@ -136,13 +140,27 @@ const ManageOrdersClient = ({ orders }: ManageOrdersClientProps) => {
                             handleDeliver(params.row.id);
                         }} />
                         <ActionBtn icon={MdRemoveRedEye} onClick={() => {
-                            router.push(`order/${params.row.id}`);
+                            router.push(`/order/${params.row.id}`);
                         }} />
                     </div>
                 );
             },
         },
     ];
+
+    const handlePayment = useCallback((id: string) => {
+        axios.put("/api/payment", {
+            id,
+            paymentStatus: "completo"
+        })
+        .then((res) => {
+            toast.success("Pagamento completo");
+            router.refresh();
+        })
+        .catch((err) => {
+            toast.error("Ops! Algo deu errado");
+        })
+    }, []);
 
     const handleDispatch = useCallback((id: string) => {
         axios.put("/api/order", {

@@ -70,7 +70,7 @@ const AddRating = ({ product, user }: AddRatingProps) => {
         return review.userId === user.id
     }));
 
-    if(userReview || !deliveredOrder) return null;
+    if(!userReview || !deliveredOrder) return null;
 
     return (
         <div className="flex flex-col gap-2 max-w-[500px]">

@@ -39,7 +39,7 @@ export async function POST(request: Request) {
         currency: 'brl',
         status: "pendente",
         deliveryStatus: "pendente",
-        paymentIntentId: token(),
+        paymentStatus: "pendente",
         products: items
     }
     

@@ -21,7 +21,7 @@ const OrderDetails = ({ order }: OrderDetailsProps) => {
             <div>Order ID: {order.id}</div>
             <div>
                 Quantidade Total: {" "}
-                <span className="font-bold">{formatPrice(order.amount)}</span>
+                <span className="font-bold">{formatPrice(order.amount / 100)}</span>
             </div>
             <div className="flex gap-2 items-center">
                 <div>Status Pagamento:</div>

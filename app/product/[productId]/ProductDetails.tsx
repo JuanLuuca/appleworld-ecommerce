@@ -8,6 +8,7 @@ import { useCart } from "@/hooks/useCart";
 import { Rating } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { MdCheckCircle } from "react-icons/md";
 
 interface ProductDetailsProps {
@@ -122,21 +123,27 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
                         <Button label="Visualizar Carrinho" outline onClick={() => router.push('/cart')} />
                     </div>
                 </> : <>
-                    <SetColor 
-                        cartProduct={cartProduct}
-                        images={product.images}
-                        handleColorSelect={handleColorSelect}
-                    />
-                    <Horizontal />
-                    <SetQuatity 
-                        cartProduct={cartProduct}
-                        handleQtyDecrease={handleQtyDecrease}
-                        handleQtyIncrease={handleQtyIncrease}
-                    />
-                    <Horizontal />
-                    <div className="max-w-[300px]">
-                        <Button label="Adicionar ao Carrinho" onClick={() => handleAddProductToCart(cartProduct)} />
-                    </div>
+                    {product.inStock ? 
+                        <>
+                            <Horizontal />
+                            <SetColor 
+                            cartProduct={cartProduct}
+                            images={product.images}
+                            handleColorSelect={handleColorSelect}
+                            />
+                            <Horizontal />
+                            <SetQuatity 
+                                cartProduct={cartProduct}
+                                handleQtyDecrease={handleQtyDecrease}
+                                handleQtyIncrease={handleQtyIncrease}
+                            />
+                            <div className="max-w-[300px]">
+                                <Button label="Adicionar ao Carrinho" onClick={() => handleAddProductToCart(cartProduct)} />
+                            </div> 
+                        </>
+                    : 
+                        <></>
+                    } 
                 </>}
             </div>
         </div>

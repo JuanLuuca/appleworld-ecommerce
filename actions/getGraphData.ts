@@ -1,8 +1,11 @@
 import prisma from "@/libs/prismadb";
 import moment from "moment";
+import "moment/locale/pt-br"; 
 
 export default async function getGraphData() {
     try {
+        moment.locale('pt-br');
+
         const startDate = moment().subtract(6, "days").startOf("day");
         const endDate = moment().endOf("day");
 
@@ -13,7 +16,7 @@ export default async function getGraphData() {
                     gte: startDate.toISOString(),
                     lte: endDate.toISOString()
                 },
-                status: "completo"
+                paymentStatus: "completo"
             },
             _sum: {
                 amount: true,
@@ -32,7 +35,7 @@ export default async function getGraphData() {
             aggragateData[day] = {
                 day,
                 date: currentDate.format("YYYY-MM-DD"),
-                totalAmount: 0
+                totalAmount: 0, 
             };
 
             currentDate.add(1, "day");
@@ -41,7 +44,7 @@ export default async function getGraphData() {
         result.forEach((entry) => {
             const day = moment(entry.createDate).format("dddd");
             const amount = entry._sum.amount || 0;
-            aggragateData[day].totalAmount += amount;
+            aggragateData[day].totalAmount = amount;
         });
 
         const formattedData = Object.values(aggragateData).sort((a, b) => 

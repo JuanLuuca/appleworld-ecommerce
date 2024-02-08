@@ -27,13 +27,15 @@ const OrdersClient = ({ orders }: OrdersClientProps) => {
             return {
                 id: order.id,
                 customer: order.user.name,
-                price: formatPrice(order.amount / 100),
+                amount: formatPrice(order.amount / 100),
                 paymentStatus: order.status,
                 date: moment(order.createDate).fromNow(),
                 deliveryStatus: order.deliveryStatus,
             }
         }});
     };
+
+    console.log("console.lgo ", rows);
 
     const columns: GridColDef[] = [
         { field: 'id', headerName: 'ID', width: 220 },
@@ -115,7 +117,7 @@ const OrdersClient = ({ orders }: OrdersClientProps) => {
         },
         {
             field: "date",
-            headerName: "Date",
+            headerName: "Data",
             width: 130
         },
         {
