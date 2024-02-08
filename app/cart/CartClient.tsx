@@ -58,7 +58,7 @@ const CartClient = ({ currentUser }: CartClientProps) => {
                         <span>{formatPrice(cartTotalAmount)}</span>
                     </div>
                     <p className="text-slate-500">Calculados na finalização da compra</p>
-                    <Button outline={currentUser ? false : true} label={currentUser ? 'Checkout' : 'Entrar para fazer checkout'} onClick={() => {
+                    <Button outline={currentUser ? false : true} label={currentUser ? 'Entrar em contato' : 'Faça login para entrar em contato'} onClick={() => {
                         currentUser ? router.push('/checkout') : router.push('/login')
                     }} />
                     <Link href={"/"} className="text-slate-500 flex items-center gap-1 mt-2">

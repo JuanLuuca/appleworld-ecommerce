@@ -44,7 +44,7 @@ const ManageOrdersClient = ({ orders }: ManageOrdersClientProps) => {
         { field: 'customer', headerName: 'Nome do Cliente', width: 130 },
         {
             field: "amount",
-            headerName: "Preço",
+            headerName: "Preço Total",
             width: 130,
             renderCell: (params) => {
                 return (

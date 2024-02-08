@@ -17,7 +17,7 @@ type GraphData = {
 
 const BarGraph = ({ data }: BarGraphProps) => {
     const labels = data.map(item => item.day);
-    const amounts = data.map(item => item.totalAmount);
+    const amounts = data.map(item => item.totalAmount / 100);
 
     const chartData = {
         labels: labels,

@@ -32,7 +32,7 @@ export type SelectedImgType = {
     image: string
 }
 
-const Horizontal = () => {
+export const Horizontal = () => {
     return <hr className="w-[30%] my-2" />
 }
 
@@ -137,7 +137,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
                                 handleQtyDecrease={handleQtyDecrease}
                                 handleQtyIncrease={handleQtyIncrease}
                             />
-                            <div className="max-w-[300px]">
+                            <div className="max-w-[300px] mt-2">
                                 <Button label="Adicionar ao Carrinho" onClick={() => handleAddProductToCart(cartProduct)} />
                             </div> 
                         </>

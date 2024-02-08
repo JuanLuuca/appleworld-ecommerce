@@ -46,6 +46,8 @@ const LoginForm = ({ currentUser }: LoginFormProps) => {
                 router.push("/cart");
                 router.refresh();
                 toast.success("Logado");
+
+                console.log(callback?.ok);
             }
 
             if(callback?.error) {
@@ -66,7 +68,7 @@ const LoginForm = ({ currentUser }: LoginFormProps) => {
                 label="Entrar com a conta Google"
                 icon={AiOutlineGoogle}
                 onClick={() => {
-                    signIn("google")
+                    signIn('google')
                 }}
             />
             <hr className="bg-slate-300 w-full h-px" />

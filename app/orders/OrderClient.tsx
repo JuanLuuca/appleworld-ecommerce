@@ -35,14 +35,12 @@ const OrdersClient = ({ orders }: OrdersClientProps) => {
         }});
     };
 
-    console.log("console.lgo ", rows);
-
     const columns: GridColDef[] = [
         { field: 'id', headerName: 'ID', width: 220 },
         { field: 'customer', headerName: 'Nome do Cliente', width: 130 },
         {
             field: "amount",
-            headerName: "Quantidade",
+            headerName: "Preço Total",
             width: 130,
             renderCell: (params) => {
                 return (

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { CiUser } from "react-icons/ci";
 import { FaUserCircle } from "react-icons/fa";
 
 interface AvatarProps {
@@ -18,7 +19,7 @@ const Avatar = ({ src }: AvatarProps) => {
             />
         ) 
     }
-    return <FaUserCircle size={24} />
+    return <CiUser size={24} />
 };
 
 export default Avatar;
