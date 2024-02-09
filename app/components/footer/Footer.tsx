@@ -15,22 +15,19 @@ const Footer = () => {
                         <Link  href="#">IPhone</Link>
                         <Link  href="#">MacBook</Link>
                         <Link  href="#">Apple Watch</Link>
-                        <Link  href="#">teste</Link>
                     </FooterList>
                     <FooterList>
                         <h3 className="text-base font-bold mb-2">Serviços</h3>
                         <Link  href="#">Contato</Link>
                         <Link  href="#">Politica de Vendas</Link>
-                        <Link  href="#">teste</Link>
-                        <Link  href="#">teste</Link>
                     </FooterList>
                     <div className="w-full md:w-1/3 mb-6 md:mb-0">
-                        <h3 className="text-base font-bold mb-2">Sobre Nós</h3>
+                        {/* <h3 className="text-base font-bold mb-2">Sobre Nós</h3>
                         <p className="mb-2">
                             is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                             when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
                             It has survived not only five centuries, but also the leap into electronic typesetting
-                         </p>
+                         </p> */}
                          <p>&copy; {new Date().getFullYear()} Apple World - Todos os direitos reservados.</p>
                     </div>
                     <FooterList>
