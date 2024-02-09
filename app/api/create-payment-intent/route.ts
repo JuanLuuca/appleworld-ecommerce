@@ -22,14 +22,6 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "Unathorized" }, { status: 401 })
     }
 
-    const rand = () => {
-        return Math.random().toString(36).substr(2);
-    };
-
-    const token = () => {
-        return rand() + rand();
-    };
-
     const body = await request.json();
     const { items } = body
     const total = calculateOrderAmount(items) * 100

@@ -68,12 +68,10 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { CartProductType } from "@prisma/client";
 import { formatPrice } from "@/utils/formatPrice";
-import { Horizontal } from "../product/[productId]/ProductDetails";
 
 const CheckoutClient = () => {
-    const { cartProducts, paymentIntent, handleSetPaymentIntent } = useCart();
+    const { cartProducts } = useCart();
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
 
     const {cartTotalAmount} = useCart();
 
@@ -82,29 +80,18 @@ const CheckoutClient = () => {
     useEffect(() => {
         if (cartProducts) {
             setLoading(true);
-            setError(true);
 
             fetch('/api/create-payment-intent', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     items: cartProducts,
-                    payment_intent_id: paymentIntent,
                 })
-            }).then((res) => {
-                setLoading(false);
-                if (res.status === 401) {
-                    return router.push('/login')
-                }
-
-                return res.json();
-            }).then((data) => {
-                handleSetPaymentIntent(data.paymentIntent.id);
-            }).catch((error) => {
-                sendWhatsAppMessage(cartProducts);
             })
+
+            sendWhatsAppMessage(cartProducts);
         }
-    }, [cartProducts, paymentIntent]);
+    }, [cartProducts]);
 
     const sendWhatsAppMessage = async (products: CartProductType[]) => {
         try {
