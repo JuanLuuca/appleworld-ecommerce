@@ -39,7 +39,7 @@ const SelectColor = ({ item, addImageToState, removeImageFromState, isProductCre
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-1 overflow-y-auto border-b-[1.2px] border-slate-200 items-center p-2">
-            <div className="flex flex-row gap-2 items-center h-[60px]">
+            <div className="flex flex-row gap-2 items-center h-[110px]">
                 <input 
                     id={item.color}
                     type="checkbox"

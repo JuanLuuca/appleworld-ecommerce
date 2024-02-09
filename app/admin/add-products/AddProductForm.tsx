@@ -242,7 +242,7 @@ const AddProductForm = () => {
                         Você deve enviar uma imagem para cada cor selecionada, caso contrário sua seleção de cores será ignorada
                     </div>
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2">
                     {colors.map((item, index) => {
                         return (
                             <SelectColor 
