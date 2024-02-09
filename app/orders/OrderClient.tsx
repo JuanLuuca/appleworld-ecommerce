@@ -28,7 +28,7 @@ const OrdersClient = ({ orders }: OrdersClientProps) => {
                 id: order.id,
                 customer: order.user.name,
                 amount: formatPrice(order.amount / 100),
-                paymentStatus: order.status,
+                paymentStatus: order.paymentStatus,
                 date: moment(order.createDate).fromNow(),
                 deliveryStatus: order.deliveryStatus,
             }

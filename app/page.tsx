@@ -13,8 +13,10 @@ interface HomeProps {
 export default async function Home({ searchParams }: HomeProps) {
   const products = await getProducts(searchParams);
 
+  console.log(products);
+
   if(products.length === 0) {
-    return <NullData title='Oops! Produtos não encontrando. Clique em "Todos" para limpar os filtros'/>
+    return <NullData title='Oops! Produtos não encontrado. Clique em "Todos" para limpar os filtros'/>
   }
 
   function shuffleArray(array: any) {

@@ -26,14 +26,14 @@ const OrderDetails = ({ order }: OrderDetailsProps) => {
             <div className="flex gap-2 items-center">
                 <div>Status Pagamento:</div>
                 <div>
-                    {order.status === "pendente" ? (
+                    {order.paymentStatus === "pendente" ? (
                         <Status 
                             text="Pendente"
                             icon={MdAccessTimeFilled}
                             bg="bg-slate-200"
                             color="text-slate-700"
                         />
-                    ) : order.status === "completo" ? (
+                    ) : order.paymentStatus === "completo" ? (
                         <Status 
                             text="Completo"
                             icon={MdDone}

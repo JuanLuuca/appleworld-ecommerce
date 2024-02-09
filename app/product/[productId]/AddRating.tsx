@@ -66,11 +66,11 @@ const AddRating = ({ product, user }: AddRatingProps) => {
 
     const deliveredOrder = user?.orders.some(order => order.products.find(item => item.id === product.id) && order.deliveryStatus === 'entregue');
 
-    const userReview = product?.reviews.find(((review: Review) => {
-        return review.userId === user.id
-    }));
+    // const userReview = product?.reviews.find(((review: Review) => {
+    //     return review.userId === user.id
+    // }));
 
-    if(!userReview || !deliveredOrder) return null;
+    if(!deliveredOrder) return null;
 
     return (
         <div className="flex flex-col gap-2 max-w-[500px]">

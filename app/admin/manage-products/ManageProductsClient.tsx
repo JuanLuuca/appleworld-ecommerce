@@ -119,20 +119,30 @@ const ManageProductsClient = ({ products }: ManageProductsClientProps) => {
     const handleDelete = useCallback(async(id: string, images: any[]) => {
         toast("Deletando produto, por favor espere...");
 
-        const handleImageDelete = async () => {
-            try {
-                for(const item of images) {
-                    if(item.image) {
-                        const imageRef = ref(storage, item.image);
-                        await deleteObject(imageRef);
-                    }
-                }
-            } catch (error) {
-                return console.log("deleção de imagem deu erro", error);
-            }
-        };
+        // const handleImageDelete = async () => {
+        //     try {
+        //         for(const item of images) {
+        //             if(item.image) {
+        //                 const imageRef = ref(storage, item.image);
+        //                 await deleteObject(imageRef);
+        //             }
+        //         }
+        //     } catch (error) {
+        //         return console.log("deleção de imagem deu erro", error);
+        //     }
+        // };
 
-        await handleImageDelete();
+        // await handleImageDelete();
+
+        // axios.delete(`/api/review/65c565844e131c8e3710f570`)
+        // .then((res) => {
+        //     toast.success("review deletado.");
+        //     router.refresh();
+        // })
+        // .catch((err) => {
+        //     toast.error("Falha ao deletar o produto.");
+        //     console.log("erro ao deletar produto ", err);
+        // })
 
         axios.delete(`/api/product/${id}`)
         .then((res) => {
@@ -142,8 +152,8 @@ const ManageProductsClient = ({ products }: ManageProductsClientProps) => {
         .catch((err) => {
             toast.error("Falha ao deletar o produto.");
             console.log("erro ao deletar produto ", err);
-        })
-    }, [])
+        });
+    }, []);
 
     return (
         <div className="max-w-[1150px] m-auto text-xl">
